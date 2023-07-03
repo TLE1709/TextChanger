@@ -1,24 +1,47 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import NavBar from "./components/NavBar";
+import TextForm from "./components/TextForm";
+import React,{useState} from 'react';
+import Alert from "./components/Alert";
+// import About from "./components/About";
+
 
 function App() {
+
+  const [darkMode,setDarkMode]=useState(false);
+  const [alert,setAlert]=useState(null);
+
+  const showAlert=(message,type)=>{
+
+    setAlert({
+      msg:message,
+      type:type
+    });
+
+    setTimeout(()=>{setAlert(null)},1500);
+  }
+  function toggleMode(){
+    setDarkMode(!darkMode);
+
+  
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   
+    <>
+<NavBar title="TextChanger" aboutText="About Us" Mode={darkMode} toggleMode={toggleMode} />
+<Alert alert={alert}/>
+<div className='container my-3'>
+
+            
+          <TextForm heading="Enter Text To Modify" Mode={darkMode} showAlert={showAlert}/>
+          
+
+
+</div>
+</>
+
   );
 }
 

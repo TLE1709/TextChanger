@@ -31,6 +31,7 @@ function TextArea(props){
 
     function handleCopy(){
         navigator.clipboard.writeText(text);
+        document.getSelection().removeAllRanges();
         props.showAlert("Text Copied","success");
     }
 
@@ -41,17 +42,17 @@ function TextArea(props){
   <div className="mb-3">
   <textarea value={text} onChange={handleChange} className="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
   </div>
-  <button type="button" className="btn btn-primary mx-1" onClick={handleClick}>Convert To UpperCase</button>
-  <button type="button" className="btn btn-primary mx-1" onClick={handleLoClick}>Convert To LowerCase</button>
-  <button type="button" className="btn btn-primary mx-1" onClick={handleClearClick}>Clear Text</button>
-  <button type="button" className="btn btn-primary" onClick={handleCopy}>Copy to Clipboard</button>
+  <button disabled={text.length===0} type="button" className="btn btn-primary mx-1 my-1" onClick={handleClick}>Convert To UpperCase</button>
+  <button disabled={text.length===0} type="button" className="btn btn-primary mx-1 my-1" onClick={handleLoClick}>Convert To LowerCase</button>
+  <button disabled={text.length===0} type="button" className="btn btn-primary mx-1 my-1" onClick={handleClearClick}>Clear Text</button>
+  <button disabled={text.length===0} type="button" className="btn btn-primary my-1" onClick={handleCopy}>Copy to Clipboard</button>
 </div>
 
 <div className="container my-4">
     <h3>Your Summary</h3>
-    <p>{text.split(" ").length} words and {text.length} characters</p>
+    <p>{text.split(" ").filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
     <p> {(0.008*text.length)} seconds to read</p>
-    <p>{text}</p>
+    <p>{text.length===0?"Nothing to Preview":text}</p>
 
 </div>
     </>

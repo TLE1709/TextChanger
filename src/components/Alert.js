@@ -9,7 +9,7 @@ function Alert(props){
     
     }
 return (
-props.alert && <div class={`alert alert-${props.alert.type}`} role="alert">
+props.alert && <div className={`alert alert-${props.alert.type}`} role="alert">
   <strong>{Ctext(props.alert.type)} : {props.alert.msg}</strong>
 </div>
 );
